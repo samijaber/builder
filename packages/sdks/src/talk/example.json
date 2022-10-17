@@ -1,0 +1,49 @@
+{
+  "children": [
+    {
+      "name": "div",
+      "bindings": {
+        "onClick": {
+          "code": "trackClick(props.content.id)"
+        }
+      },
+      "children": [
+        {
+          "name": "RenderBlocks",
+          "bindings": {
+            "blocks": {
+              "code": "props.content.blocks"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "hooks": {
+    "onMount": {
+      "code": "Object.values(props.customComponents).forEach(registeredComponent => { sendComponentToVisualEditor(registeredComponent); });"
+    },
+    "onUpdate": [
+      {
+        "code": "dispatchNewContentToVisualEditor(props.content);",
+        "deps": ["content"]
+      }
+    ]
+  },
+  "context": {
+    "set": {
+      "name": "BuilderContext",
+      "value": {
+        "content": {
+          "type": "getter",
+          "code": "get content() { return props.content; }"
+        },
+        "registeredComponents": {
+          "type": "getter",
+          "code": "get registeredComponents() { return props.customComponents; }"
+        }
+      }
+    }
+  },
+  "name": "RenderContent"
+}
