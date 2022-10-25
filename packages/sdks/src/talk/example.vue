@@ -1,42 +1,28 @@
+<script setup>
+import { onMounted, provide, watch } from 'vue';
+
+const props = defineProps(['content', 'customComponents']);
+
+provide(BuilderContext, undefined);
+
+onMounted(() => {
+  sendComponentsToVisualEditor(props.customComponents);
+});
+
+watch([props.content], ([content]) => {
+  dispatchNewContentToVisualEditor(props.content);
+});
+</script>
+
 <template>
-  <div @click="trackClick(content.id)">
+  <div class="div" @click="trackClick(content.id)">
     <render-blocks :blocks="content.blocks"></render-blocks>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'render-content',
-  components: { RenderBlocks: RenderBlocks },
-  props: ['content', 'customComponents'],
-
-  provide() {
-    return {
-      BuilderContext: {
-        content: this.content,
-        registeredComponents: this.registeredComponents,
-      },
-    };
-  },
-
-  mounted() {
-    Object.values(this.customComponents).forEach((registeredComponent) => {
-      sendComponentToVisualEditor(registeredComponent);
-    });
-  },
-
-  watch: {
-    onUpdateHook() {
-      dispatchNewContentToVisualEditor(this.content);
-    },
-  },
-
-  computed: {
-    onUpdateHook() {
-      return {
-        0: this.content,
-      };
-    },
-  },
-};
-</script>
+<style scoped>
+.div {
+  display: flex;
+  flex-direction: columns;
+}
+</style>

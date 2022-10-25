@@ -10,12 +10,19 @@ export default function RenderContent(props) {
   }, [props.content]);
 
   setContext(BuilderContext, {
-    content: props.content,
-    registeredComponents: props.customComponents,
+    get content() {
+      return props.content;
+    },
+    get registeredComponents() {
+      return props.customComponents;
+    },
   });
 
   return (
-    <div onClick={() => trackClick(props.content.id)}>
+    <div
+      css={{ display: 'flex', flexDirection: 'columns' }}
+      onClick={() => trackClick(props.content.id)}
+    >
       <RenderBlocks blocks={props.content.blocks} />
     </div>
   );
