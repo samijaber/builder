@@ -36,6 +36,7 @@ import {
   registerInsertMenu,
   setupBrowserForEditing,
 } from '../../scripts/init-editing.js';
+import StateContext from '../../context/state.context.lite';
 
 useMetadata({
   qwik: {
@@ -267,15 +268,6 @@ export default function RenderContent(props: RenderContentProps) {
     get content() {
       return state.useContent;
     },
-    get state() {
-      return new Proxy(state.contentState, {
-        set: (obj, prop: string, value) => {
-          console.log('setting', obj, prop, value);
-          obj[prop] = value;
-          return true;
-        },
-      });
-    },
     get context() {
       return state.contextContext;
     },
@@ -286,6 +278,8 @@ export default function RenderContent(props: RenderContentProps) {
       return state.allRegisteredComponents;
     },
   });
+
+  setContext(StateContext, state.contentState);
 
   onMount(() => {
     if (!props.apiKey) {

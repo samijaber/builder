@@ -2,6 +2,7 @@ import BuilderContext from '../../context/builder.context.lite';
 import { setContext } from '@builder.io/mitosis';
 import type { RenderComponentProps } from './render-component.lite';
 import RenderComponent from './render-component.lite';
+import stateContextLite from '../../context/state.context.lite';
 
 export default function RenderComponentWithContext(
   props: RenderComponentProps
@@ -14,9 +15,6 @@ export default function RenderComponentWithContext(
   setContext(BuilderContext, {
     get content() {
       return props.context.content;
-    },
-    get state() {
-      return props.context.state;
     },
     get context() {
       return props.context.context;
@@ -31,12 +29,16 @@ export default function RenderComponentWithContext(
       return props.context.inheritedStyles;
     },
   });
+
+  setContext(stateContextLite, props.contextState);
+
   return (
     <RenderComponent
       componentRef={props.componentRef}
       componentOptions={props.componentOptions}
       blockChildren={props.blockChildren}
       context={props.context}
+      contextState={props.contextState}
     />
   );
 }

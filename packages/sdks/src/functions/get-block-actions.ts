@@ -1,4 +1,4 @@
-import type { BuilderContextInterface } from '../context/types.js';
+import type { BuilderContextAndState } from '../context/types.js';
 import type { BuilderBlock } from '../types/builder-block.js';
 import { getEventHandlerName } from './event-handler-name.js';
 import { createEventHandler } from './get-block-actions-handler.js';
@@ -8,7 +8,7 @@ type Actions = { [index: string]: (event: Event) => any };
 export function getBlockActions(
   options: {
     block: BuilderBlock;
-  } & Pick<BuilderContextInterface, 'state' | 'context'>
+  } & BuilderContextAndState
 ): Actions {
   const obj: Actions = {};
   const optionActions = options.block.actions ?? {};

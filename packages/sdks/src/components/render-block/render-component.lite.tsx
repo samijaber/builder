@@ -2,13 +2,17 @@ import type { BuilderBlock } from '../../types/builder-block.js';
 import BlockStyles from './block-styles.lite';
 import RenderBlock from './render-block.lite';
 import { For, Show, useMetadata } from '@builder.io/mitosis';
-import type { BuilderContextInterface } from '../../context/types.js';
+import type {
+  BuilderContextInterface,
+  BuilderStateContext,
+} from '../../context/types.js';
 
 export interface RenderComponentProps {
   componentRef: any;
   componentOptions: any;
   blockChildren: BuilderBlock[];
   context: BuilderContextInterface;
+  contextState: BuilderStateContext;
 }
 
 useMetadata({
@@ -33,6 +37,7 @@ export default function RenderComponent(props: RenderComponentProps) {
               key={'render-block-' + child.id}
               block={child}
               context={props.context}
+              contextState={props.contextState}
             />
           )}
         </For>
@@ -42,6 +47,7 @@ export default function RenderComponent(props: RenderComponentProps) {
               key={'block-style-' + child.id}
               block={child}
               context={props.context}
+              contextState={props.contextState}
             />
           )}
         </For>

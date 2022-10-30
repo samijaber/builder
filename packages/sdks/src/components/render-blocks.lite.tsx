@@ -4,6 +4,7 @@ import type { BuilderBlock } from '../types/builder-block.js';
 import BlockStyles from './render-block/block-styles.lite';
 import RenderBlock from './render-block/render-block.lite';
 import { For, Show, useStore, useContext } from '@builder.io/mitosis';
+import StateContext from '../context/state.context.lite';
 
 export type RenderBlockProps = {
   blocks?: BuilderBlock[];
@@ -14,6 +15,7 @@ export type RenderBlockProps = {
 
 export default function RenderBlocks(props: RenderBlockProps) {
   const builderContext = useContext(BuilderContext);
+  const stateContext = useContext(StateContext);
 
   const state = useStore({
     get className() {
@@ -81,6 +83,7 @@ export default function RenderBlocks(props: RenderBlockProps) {
               key={'render-block-' + block.id}
               block={block}
               context={builderContext}
+              contextState={stateContext}
             />
           )}
         </For>
@@ -92,6 +95,7 @@ export default function RenderBlocks(props: RenderBlockProps) {
               key={'block-style-' + block.id}
               block={block}
               context={builderContext}
+              contextState={stateContext}
             />
           )}
         </For>

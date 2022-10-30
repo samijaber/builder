@@ -1,5 +1,6 @@
 import RenderContent from '../../components/render-content/render-content.lite';
 import BuilderContext from '../../context/builder.context.lite';
+import BuilderState from '../../context/state.context.lite';
 import { getContent } from '../../functions/get-content/index.js';
 import type { BuilderContent } from '../../types/builder-content.js';
 import { onUpdate, useContext, useStore } from '@builder.io/mitosis';
@@ -26,6 +27,7 @@ export interface SymbolProps {
 
 export default function Symbol(props: SymbolProps) {
   const builderContext = useContext(BuilderContext);
+  const builderState = useContext(BuilderState);
 
   const state = useStore({
     className: 'builder-symbol',
@@ -77,7 +79,7 @@ export default function Symbol(props: SymbolProps) {
         customComponents={Object.values(builderContext.registeredComponents)}
         data={{
           ...props.symbol?.data,
-          ...builderContext.state,
+          ...builderState,
           ...props.symbol?.content?.data?.state,
         }}
         model={props.symbol?.model}

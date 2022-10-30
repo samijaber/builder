@@ -15,9 +15,17 @@ export type BuilderRenderContext = Record<string, unknown>;
 export interface BuilderContextInterface {
   content: Nullable<BuilderContent>;
   context: BuilderRenderContext;
-  state: BuilderRenderState;
   apiKey: string | null;
   registeredComponents: RegisteredComponents;
   // Used to recursively store all CSS coming from a parent that would apply to a Text block
   inheritedStyles: Record<string, unknown>;
 }
+
+export type BuilderStateContext = BuilderRenderState;
+
+export type BuilderContextAndState = Pick<
+  BuilderContextInterface,
+  'context'
+> & {
+  state: BuilderRenderState;
+};

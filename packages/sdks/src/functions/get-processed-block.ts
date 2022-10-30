@@ -1,4 +1,4 @@
-import type { BuilderContextInterface } from '../context/types.js';
+import type { BuilderContextAndState } from '../context/types.js';
 import type { BuilderBlock } from '../types/builder-block.js';
 import { evaluate } from './evaluate.js';
 import { fastClone } from './fast-clone.js';
@@ -11,7 +11,7 @@ const evaluateBindings = ({
   state,
 }: {
   block: BuilderBlock;
-} & Pick<BuilderContextInterface, 'state' | 'context'>): BuilderBlock => {
+} & BuilderContextAndState): BuilderBlock => {
   if (!block.bindings) {
     return block;
   }
@@ -43,7 +43,7 @@ export function getProcessedBlock({
    * also sometimes too early to consider bindings, e.g. when we might be looking at a repeated block.
    */
   shouldEvaluateBindings: boolean;
-} & Pick<BuilderContextInterface, 'state' | 'context'>): BuilderBlock {
+} & BuilderContextAndState): BuilderBlock {
   const transformedBlock = transformBlock(block);
 
   if (shouldEvaluateBindings) {
