@@ -1,8 +1,3 @@
-const Div = styled.div`
-  display: flex;
-  flex-direction: columns;
-`;
-
 function RenderContent(props) {
   useEffect(() => {
     sendComponentsToVisualEditor(props.customComponents);
@@ -14,9 +9,12 @@ function RenderContent(props) {
 
   return (
     <BuilderContext.Provider value={{ content: props.content }}>
-      <Div onClick={() => trackClick(props.content.id)}>
+      <div
+        style={{ display: 'flex', flexDirection: 'column' }}
+        onClick={() => trackClick(props.content.id)}
+      >
         <RenderBlocks blocks={props.content.blocks} />
-      </Div>
+      </div>
     </BuilderContext.Provider>
   );
 }

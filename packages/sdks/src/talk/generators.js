@@ -1,29 +1,28 @@
 const ON_MOUNT_CODE = `
-  Object.values(props.customComponents).forEach((registeredComponent) => {
-    sendComponentToVisualEditor(registeredComponent);
-  });
+  sendComponentsToVisualEditor(props.customComponents)
 `;
+
 const REACT_CODE = `
-useEffect(() => {
-  ${ON_MOUNT_CODE}
+  useEffect(() => { 
+    ${ON_MOUNT_CODE} 
 }, []);`;
 
 const VUE_CODE = `
-mounted() {
-  ${ON_MOUNT_CODE}
-}`;
+  onMounted(() => { 
+    ${ON_MOUNT_CODE} 
+})`;
 
 const SVELTE_CODE = `
-onMount(() => {
-  ${ON_MOUNT_CODE}
+  onMount(() => { 
+    ${ON_MOUNT_CODE} 
 });`;
 
 const SOLIDJS_CODE = `
-onMount(() => {
-  ${ON_MOUNT_CODE}
+  onMount(() => { 
+    ${ON_MOUNT_CODE} 
 });`;
 
 const QWIK_CODE = `
-useClientEffect$(() => {
-  ${ON_MOUNT_CODE}
+  useClientEffect$(() => { 
+    ${ON_MOUNT_CODE} 
 });`;

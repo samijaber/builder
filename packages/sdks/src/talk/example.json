@@ -3,6 +3,9 @@
     {
       "name": "div",
       "bindings": {
+        "css": {
+          "code": "{\n  display: 'flex',\n  flexDirection: 'columns'\n}"
+        },
         "onClick": {
           "code": "trackClick(props.content.id)"
         }
@@ -21,7 +24,7 @@
   ],
   "hooks": {
     "onMount": {
-      "code": "Object.values(props.customComponents).forEach(registeredComponent => { sendComponentToVisualEditor(registeredComponent); });"
+      "code": "sendComponentsToVisualEditor(props.customComponents)"
     },
     "onUpdate": [
       {

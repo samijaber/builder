@@ -1,10 +1,9 @@
 import { onMount, on, createEffect } from 'solid-js';
+import { css } from 'solid-styled-components';
 
 function RenderContent(props) {
   onMount(() => {
-    Object.values(props.customComponents).forEach((registeredComponent) => {
-      sendComponentToVisualEditor(registeredComponent);
-    });
+    sendComponentsToVisualEditor(props.customComponents);
   });
 
   createEffect(
@@ -23,7 +22,13 @@ function RenderContent(props) {
         registeredComponents: props.customComponents,
       }}
     >
-      <div onClick={(event) => trackClick(props.content.id)}>
+      <div
+        class={css({
+          display: 'flex',
+          flexDirection: 'columns',
+        })}
+        onClick={() => trackClick(props.content.id)}
+      >
         <RenderBlocks blocks={props.content.blocks}></RenderBlocks>
       </div>
     </BuilderContext.Provider>
