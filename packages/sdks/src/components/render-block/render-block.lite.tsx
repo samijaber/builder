@@ -86,6 +86,13 @@ export default function RenderBlock(props: RenderBlockProps) {
         context: props.context.context,
       });
     },
+    get actions() {
+      return getBlockActions({
+        block: state.useBlock,
+        state: props.context.state,
+        context: props.context.context,
+      });
+    },
     get attributes() {
       return {
         ...getBlockProperties(state.useBlock),
