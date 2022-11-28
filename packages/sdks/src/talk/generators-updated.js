@@ -47,3 +47,24 @@ const QWIK_CODE = `
   useClientEffect$(() => { 
     ${ON_MOUNT_CODE} 
 });`;
+
+/**
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+
+//before
+const SVELTE_CODE = `
+  onMount(() => { 
+    ${ON_MOUNT_CODE} 
+});`;
+
+//after
+const SVELTE_CODE = `
+  onMount(() => { 
+    ${replacePropsIdentifier(ON_MOUNT_CODE)} 
+});`;

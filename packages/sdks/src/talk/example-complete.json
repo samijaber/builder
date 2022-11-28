@@ -1,7 +1,18 @@
 {
+  "@type": "@builder.io/mitosis/component",
+  "imports": [],
+  "exports": {},
+  "inputs": [],
+  "meta": {},
+  "refs": {},
+  "state": {},
   "children": [
     {
+      "@type": "@builder.io/mitosis/node",
       "name": "div",
+      "meta": {},
+      "scope": {},
+      "properties": {},
       "bindings": {
         "css": {
           "code": "{\n  display: 'flex',\n  flexDirection: 'columns'\n}"
@@ -12,12 +23,39 @@
       },
       "children": [
         {
+          "@type": "@builder.io/mitosis/node",
+          "name": "div",
+          "meta": {},
+          "scope": {},
+          "properties": {
+            "_text": "\n      "
+          },
+          "bindings": {},
+          "children": []
+        },
+        {
+          "@type": "@builder.io/mitosis/node",
           "name": "RenderBlocks",
+          "meta": {},
+          "scope": {},
+          "properties": {},
           "bindings": {
             "blocks": {
               "code": "props.content.blocks"
             }
-          }
+          },
+          "children": []
+        },
+        {
+          "@type": "@builder.io/mitosis/node",
+          "name": "div",
+          "meta": {},
+          "scope": {},
+          "properties": {
+            "_text": "\n    "
+          },
+          "bindings": {},
+          "children": []
         }
       ]
     }
@@ -34,8 +72,9 @@
     ]
   },
   "context": {
+    "get": {},
     "set": {
-      "./BuilderContext.context.lite:default": {
+      "null": {
         "name": "BuilderContext",
         "value": {
           "content": {
@@ -50,5 +89,6 @@
       }
     }
   },
-  "name": "RenderContent"
+  "name": "RenderContent",
+  "subComponents": []
 }

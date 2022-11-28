@@ -1,8 +1,6 @@
 export default function RenderContent(props) {
   onMount(() => {
-    Object.values(props.customComponents).forEach((registeredComponent) => {
-      sendComponentToVisualEditor(registeredComponent);
-    });
+    sendComponentsToVisualEditor(registeredComponent);
   });
 
   onUpdate(() => {
@@ -10,12 +8,8 @@ export default function RenderContent(props) {
   }, [props.content]);
 
   setContext(BuilderContext, {
-    get content() {
-      return props.content;
-    },
-    get registeredComponents() {
-      return props.customComponents;
-    },
+    content: props.content,
+    registeredComponents: props.customComponents,
   });
 
   return (

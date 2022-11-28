@@ -8,7 +8,12 @@ function RenderContent(props) {
   }, [props.content]);
 
   return (
-    <BuilderContext.Provider value={{ content: props.content }}>
+    <BuilderContext.Provider
+      value={{
+        content: props.content,
+        registeredComponents: props.customComponents,
+      }}
+    >
       <div
         style={{ display: 'flex', flexDirection: 'column' }}
         onClick={() => trackClick(props.content.id)}
