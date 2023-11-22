@@ -1,21 +1,7 @@
 import { expect } from '@playwright/test';
 import { EXCLUDE_RN, findTextInPage, isRNSDK, test, excludeTestFor } from './helpers.js';
 
-test('Client-side navigation', async ({ page }) => {
-  await page.goto('/');
-
-  const links = page.locator('a');
-
-  const columnsLink = await links.filter({
-    hasText: 'Columns (with images) ',
-  });
-
-  await expect(columnsLink).toHaveCount(1);
-  await columnsLink.click();
-  await findTextInPage({ page, text: 'Stack at tablet' });
-});
-
-test.describe('Features', () => {
+test.describe('Dynamic Content', () => {
   test.describe('Reactive State', () => {
     test('shows default value', async ({ page }) => {
       test.fail(EXCLUDE_RN);
@@ -84,17 +70,24 @@ test.describe('Features', () => {
       await expect(page.locator('body')).not.toContainText('even clicks');
     });
   });
-  test('Dynamic Data Bindings', async ({ page }) => {
-    await page.goto('/data-bindings');
+  test.describe('Dynamic Data Bindings', () => {
+    test('renders binding value', async ({ page }) => {
+      await page.goto('/data-bindings');
 
-    await expect(page.locator(`text="1234"`).first()).toBeVisible();
-    await findTextInPage({
-      page,
-      text: 'The Hot Wheels™ Legends Tour is Back',
+      await expect(page.locator(`text="1234"`).first()).toBeVisible();
     });
-    await findTextInPage({
-      page,
-      text: 'Mattel Certified by Great Place to Work and Named to Fast Company’s List of 100 Best Workplaces for Innovators',
+
+    test('renders repeated block', async ({ page }) => {
+      await page.goto('/data-bindings');
+
+      await findTextInPage({
+        page,
+        text: 'The Hot Wheels™ Legends Tour is Back',
+      });
+      await findTextInPage({
+        page,
+        text: 'Mattel Certified by Great Place to Work and Named to Fast Company’s List of 100 Best Workplaces for Innovators',
+      });
     });
   });
 
