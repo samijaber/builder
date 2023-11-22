@@ -162,7 +162,23 @@
       }
     },
     "./vue3/css": "./vue3/lib/browser/style.css",
-    "./css": "./vue3/lib/browser/style.css"
+    "./css": "./vue3/lib/browser/style.css",
+    "./vue3/edge": {
+      "import": "./vue3/lib/edge/index.js",
+      "require": "./vue3/lib/edge/index.cjs"
+    },
+    "./vue3/node": {
+      "import": "./vue3/lib/node/index.js",
+      "require": "./vue3/lib/node/index.cjs"
+    },
+    "./vue2/edge": {
+      "import": "./vue2/lib/edge/index.js",
+      "require": "./vue2/lib/edge/index.cjs"
+    },
+    "./vue2/node": {
+      "import": "./vue2/lib/node/index.js",
+      "require": "./vue2/lib/node/index.cjs"
+    }
   },
   "scripts": {
     "release": "npm publish",

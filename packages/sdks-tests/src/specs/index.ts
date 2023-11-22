@@ -155,3 +155,13 @@ export const getProps = async (args: {
 
   return { ...props, content } as any;
 };
+
+export const getRuntime = (_href?: string) => {
+  const href = _href || getPathnameFromWindow();
+
+  if (href.includes('runtime=edge')) {
+    return 'edge';
+  }
+
+  return 'node';
+};
