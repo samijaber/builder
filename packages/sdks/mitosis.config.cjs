@@ -168,6 +168,7 @@ module.exports = {
   getTargetPath,
   options: {
     solid: {
+      typescript: true,
       plugins: [
         () => ({
           json: {
@@ -296,6 +297,7 @@ module.exports = {
       stylesType: 'style-tag',
     },
     rsc: {
+      explicitImportFileExtension: true,
       typescript: true,
       plugins: [
         SRCSET_PLUGIN,
@@ -341,7 +343,7 @@ module.exports = {
           json: {
             pre: (json) => {
               /**
-               * We cannot set context in `ComponentRef` because it's a light : component.
+               * We cannot set context in `ComponentRef` because it's a light component.
                * We only need to set the context for a React Native need: CSS-style inheritance for Text blocks.
                **/
               if (json.name === 'ComponentRef') {

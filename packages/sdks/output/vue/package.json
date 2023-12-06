@@ -1,14 +1,14 @@
 {
   "name": "@builder.io/sdk-vue",
   "description": "Builder.io SDK for Vue",
+  "version": "0.7.3",
+  "main": "./vue3/lib/node/index.cjs",
+  "module": "./vue3/lib/node/index.js",
+  "type": "module",
   "workspaces": [
     "vue2",
     "vue3"
   ],
-  "version": "0.7.0",
-  "main": "./vue3/lib/node/index.cjs",
-  "module": "./vue3/lib/node/index.js",
-  "type": "module",
   "files": [
     "vue2/lib",
     "vue2/css/package.json",
@@ -187,8 +187,10 @@
     "build": "nx run-many -t build -p @builder.io/sdk-vue-2 @builder.io/sdk-vue-3"
   },
   "peerDependencies": {
-    "isolated-vm": "^4.6.0",
     "vue": ">= 2"
+  },
+  "dependencies": {
+    "isolated-vm": "^4.6.0"
   },
   "devDependencies": {
     "nx": "^16.6.0",

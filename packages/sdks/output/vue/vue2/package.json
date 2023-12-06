@@ -1,6 +1,7 @@
 {
   "name": "@builder.io/sdk-vue-2",
   "type": "module",
+  "private": true,
   "main": "./lib/node/index.cjs",
   "module": "./lib/node/index.js",
   "files": [
@@ -14,6 +15,9 @@
     "build:edge": "SDK_ENV=edge yarn vite-build",
     "build:browser": "SDK_ENV=browser yarn vite-build",
     "type-check": "vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "isolated-vm": "^4.6.0"
   },
   "devDependencies": {
     "@builder.io/sdks": "workspace:*",
@@ -31,7 +35,6 @@
     "vue-tsc": "^0.38.8"
   },
   "peerDependencies": {
-    "isolated-vm": "^4.6.0",
     "vue": "^2.7.7"
   },
   "nx": {

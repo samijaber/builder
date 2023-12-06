@@ -1,7 +1,7 @@
 {
   "name": "@builder.io/sdk-svelte",
   "description": "Builder.io SDK for Svelte",
-  "version": "0.7.0",
+  "version": "0.7.3",
   "type": "module",
   "files": [
     "lib",
@@ -10,7 +10,7 @@
   "homepage": "https://github.com/BuilderIO/builder/tree/main/packages/sdks/output/svelte#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/BuilderIO/builder.git",
+    "url": "git+https://github.com/BuilderIO/builder.git",
     "directory": "packages/sdks/output/svelte"
   },
   "main": "./lib/node/index.js",
@@ -39,11 +39,14 @@
   "scripts": {
     "release": "npm publish",
     "prepare": "SDK_ENV=browser svelte-kit sync",
-    "build": "nx run-many -p @builder.io/sdk-svelte -t build:node build:edge build:browser",
+    "build": "nx run-many -p @builder.io/sdk-svelte -t build:node build:edge build:browser --parallel=false",
     "build:node": "SDK_ENV=node svelte-package -i src/ -o lib/node",
     "build:edge": "SDK_ENV=edge svelte-package -i src/ -o lib/edge",
     "build:browser": "SDK_ENV=browser svelte-package -i src/ -o lib/browser",
     "check": "SDK_ENV=browser svelte-check --tsconfig ./tsconfig.json"
+  },
+  "dependencies": {
+    "isolated-vm": "^4.6.0"
   },
   "devDependencies": {
     "@builder.io/sdks": "workspace:*",
@@ -83,7 +86,6 @@
     }
   },
   "peerDependencies": {
-    "isolated-vm": "^4.6.0",
     "svelte": "^4.1.2"
   }
 }

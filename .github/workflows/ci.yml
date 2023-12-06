@@ -19,10 +19,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Use node version 16
+      - name: Use node version 18
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: '18.x'
 
       - run: npm run ci:lint
 
@@ -37,10 +37,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Use node version 16
+      - name: Use node version 18
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: '18.x'
 
       - name: Get npm cache directory
         id: npm-cache-dir
@@ -68,11 +68,8 @@ jobs:
         working-directory: packages/${{ matrix.package }}
 
   sdks-base:
+    name: Gen 2 SDKs checks
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: packages/sdks
 
     steps:
       - name: Setup
@@ -81,17 +78,16 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: '18.x'
 
       - name: 📥 Monorepo install
         uses: ./.github/actions/yarn-nm-install
         with:
-          cwd: 'packages/'
           cache-node-modules: true
           cache-install-state: true
 
       - name: Run prettier
-        run: yarn ci:lint
+        run: yarn workspace @builder.io/sdks ci:lint:sdks
 
       - name: Typecheck
         run: yarn nx typecheck @builder.io/sdks
@@ -100,6 +96,7 @@ jobs:
         run: yarn nx test @builder.io/sdks
 
   sdks:
+    name: Gen 2 SDKs
     runs-on: ubuntu-latest
 
     strategy:
@@ -125,10 +122,6 @@ jobs:
           - sdk: vue3
             sdk-name: vue
 
-    defaults:
-      run:
-        working-directory: packages/sdks
-
     steps:
       - name: Setup
         uses: actions/checkout@v3
@@ -136,12 +129,11 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: '18.x'
 
       - name: 📥 Monorepo install
         uses: ./.github/actions/yarn-nm-install
         with:
-          cwd: 'packages/'
           cache-node-modules: true
           cache-install-state: true
 
@@ -161,11 +153,8 @@ jobs:
           retention-days: 30
 
   gen1-sdk-core:
+    name: Gen 1 SDK Core
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: packages
 
     steps:
       - name: Setup
@@ -174,12 +163,11 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: '18.x'
 
       - name: 📥 Monorepo install
         uses: ./.github/actions/yarn-nm-install
         with:
-          cwd: 'packages/'
           cache-node-modules: true
           cache-install-state: true
 
@@ -187,11 +175,8 @@ jobs:
         run: yarn nx build @builder.io/sdk
 
   gen1-react-sdk:
+    name: Gen 1 React SDK
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: packages
 
     steps:
       - name: Setup
@@ -200,17 +185,16 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: '18.x'
 
       - name: 📥 Monorepo install
         uses: ./.github/actions/yarn-nm-install
         with:
-          cwd: 'packages/'
           cache-node-modules: true
           cache-install-state: true
 
       - name: Build E2E apps
-        run: yarn workspace @builder.io/mono-repo e2e:build:old-react
+        run: yarn workspace @builder.io/packages e2e:build:old-react
 
       - name: Run E2E tests
-        run: yarn workspace @builder.io/mono-repo e2e:run:old-react
+        run: yarn workspace @builder.io/packages e2e:run:old-react
