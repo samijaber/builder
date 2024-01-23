@@ -25,6 +25,7 @@ export default async function Page(props: MyPageProps) {
     _processContentResult,
     options: getBuilderSearchParams(props.searchParams),
     getContent,
+    data: 'real',
   });
 
   if (!builderProps) {
@@ -47,6 +48,7 @@ export default async function Page(props: MyPageProps) {
         {
           name: 'CatFacts',
           component: CatFacts,
+          // isRsc: true,
           inputs: [
             {
               name: 'text',
