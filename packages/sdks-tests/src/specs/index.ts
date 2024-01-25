@@ -79,6 +79,9 @@ const PAGES = {
   '/input-default-value': INPUT_DEFAULT_VALUE,
   '/duplicate-attributes': DUPLICATE_ATTRIBUTES,
   '/js-content-is-browser': JS_CONTENT_IS_BROWSER,
+  '/no-trusted-hosts': homepage,
+  '/columns-no-trusted-hosts': columns,
+  '/editing-styles-no-trusted-hosts': EDITING_STYLES,
 } as const;
 
 const apiVersionPathToProp = {
@@ -154,6 +157,10 @@ export const getProps = async (args: {
     pathname === '/can-track-false'
       ? {
           canTrack: false,
+        }
+      : pathname.includes('no-trusted-hosts')
+      ? {
+          trustedHosts: [],
         }
       : {};
 
