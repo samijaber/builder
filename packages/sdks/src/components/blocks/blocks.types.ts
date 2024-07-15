@@ -8,6 +8,7 @@ import type { BlocksWrapperProps } from './blocks-wrapper.lite';
 export type BlocksProps = Partial<
   Omit<BlocksWrapperProps, 'BlocksWrapper' | 'BlocksWrapperProps'>
 > & {
+  className?: string;
   context?: Signal<BuilderContextInterface>;
   registeredComponents?: RegisteredComponents;
   linkComponent?: any;
