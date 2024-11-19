@@ -73,6 +73,7 @@ import { BLOCKS_CLASS_NAME } from './blocks-class-name.js';
 import { DUPLICATED_CONTENT_USING_NESTED_SYMBOLS } from './duplicated-content-using-nested-symbols.js';
 import { CUSTOM_COMPONENTS_NOWRAP } from './custom-components-nowrap.js';
 import { XSS_EXPLOIT } from './xss-exploit.js';
+import { JSCODE_ASYNC } from './jscode-async.js';
 
 function isBrowser(): boolean {
   return typeof window !== 'undefined' && typeof document !== 'undefined';
@@ -188,6 +189,7 @@ export const PAGES: Record<string, Page> = {
   '/xss-exploit': { content: XSS_EXPLOIT },
   '/get-content': { content: HTTP_REQUESTS, target: 'gen1' },
   '/get-query': { content: HTTP_REQUESTS, target: 'gen1' },
+  '/jscode-async': { content: JSCODE_ASYNC },
 } as const;
 
 export type Path = keyof typeof PAGES;
